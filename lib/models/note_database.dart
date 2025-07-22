@@ -3,7 +3,7 @@ import 'package:my_papers/models/note.dart';
 import 'package:my_papers/models/utils.dart';
 import 'package:my_papers/objectbox.g.dart'; // created by `flutter pub run build_runner build`
 
-class NoteDatabase extends ChangeNotifier{
+class NoteDatabase extends ChangeNotifier {
   late final Store _store;
   late final Box<Note> _noteBox;
 
@@ -32,18 +32,21 @@ class NoteDatabase extends ChangeNotifier{
     }
     final note = Note(text: text, date: date, iv: "");
     _noteBox.put(note);
+    fetchNote(fdate: date);
     return true;
   }
 
-  void fetchNote({DateTime? fdate}) {
+  void fetchNote({DateTime? fdate, bool? notnotify}) {
     fdate ??= DateTime.now();
     final (start, end) = getWeekRange(fdate);
     startDate = start;
     endDate = end;
-    final query = _noteBox.query(Note_.date.between(start.millisecondsSinceEpoch, start.millisecondsSinceEpoch));
+    final query = _noteBox.query(Note_.date.between(start.millisecondsSinceEpoch, end.millisecondsSinceEpoch));
     currentNotes.clear();
     currentNotes.addAll(query.build().find());
-    notifyListeners();
+    if(notnotify == null || !notnotify) {
+      notifyListeners();
+    }
   }
 
   void updateNote(int id, String text) {
