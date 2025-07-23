@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-//import 'package:get_it/get_it.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-//import 'package:my_papers/models/aes_cipher.dart';
+import 'package:my_papers/models/aes_cipher.dart';
 import 'package:my_papers/models/utils.dart';
 import 'package:my_papers/pages/notes_pages.dart';
 
@@ -40,7 +40,7 @@ class _AuthPageState extends State<AuthPage> {
     }
 
     if (storedHash == hashInput) {
-      //GetIt.I.registerSingleton<AESCipher>(AESCipher(input));
+      GetIt.I.registerSingleton<AESCipher>(AESCipher(input));
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => NotesPage()),

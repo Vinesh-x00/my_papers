@@ -128,7 +128,7 @@ class _NotesPageState extends State<NotesPage> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Text(
-                "my_papers",
+                "MY PAPERS",
                 style: GoogleFonts.dmSerifText(
                   fontSize: 48,
                   color: Theme.of(context).colorScheme.inversePrimary,

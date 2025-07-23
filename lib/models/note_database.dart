@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:my_papers/models/aes_cipher.dart';
 import 'package:my_papers/models/note.dart';
 import 'package:my_papers/models/utils.dart';
 import 'package:my_papers/objectbox.g.dart'; // created by `flutter pub run build_runner build`
@@ -37,6 +41,7 @@ class NoteDatabase extends ChangeNotifier {
   }
 
   void fetchNote({DateTime? fdate, bool? notnotify}) {
+    log("Fetched");
     fdate ??= DateTime.now();
     final (start, end) = getWeekRange(fdate);
     startDate = start;
@@ -52,7 +57,9 @@ class NoteDatabase extends ChangeNotifier {
   void updateNote(int id, String text) {
     final existingNote = _noteBox.get(id);
     if(existingNote != null) {
-      existingNote.text = text;
+      final cipherinfo = GetIt.I<AESCipher>().encryptText(text: text);
+      existingNote.text = cipherinfo.ciphertext;
+      existingNote.iv = cipherinfo.iv;
       _noteBox.put(existingNote);
     }
     fetchNote(fdate: startDate);

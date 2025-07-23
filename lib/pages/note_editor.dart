@@ -21,9 +21,9 @@ class _NoteEditorState extends State<NoteEditor> {
   @override
   void initState() {
     if(widget.note.text.isNotEmpty) {
-      //final cinfo = EncryptedInfo(widget.note.iv, widget.note.text);
-      //final decryptedTxt = GetIt.I<AESCipher>().decrypt(cinfo);
-      final decryptedTxt = widget.note.text;
+      final cinfo = EncryptedInfo(widget.note.iv, widget.note.text);
+      final decryptedTxt = GetIt.I<AESCipher>().decrypt(cinfo);
+      //final decryptedTxt = widget.note.text;
       _controller.document = Document()..insert(0, decryptedTxt);
     }
     super.initState();

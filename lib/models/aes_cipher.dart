@@ -18,7 +18,8 @@ class AESCipher {
   
   /// Pad with null bytes or trim the key to exactly 32 bytes
   String keypadding(String key) {
-    List<int> keyBytes = utf8.encode(key);
+    List<int> keyBytes = [];
+    keyBytes.addAll(utf8.encode(key));
     
     if (keyBytes.length == 32) {
       return key;
@@ -122,17 +123,3 @@ class AESCipher {
     return data.sublist(0, data.length - paddingLength);
   }
 }
-
-// Example usage:
-/*
-void main() {
-  final cipher = AESCipher('mySecretKey123');
-  
-  // Encrypt
-  final result = cipher.encryptText(text: 'Hello, World!');
-  
-  // Decrypt
-  final decrypted = cipher.decrypt(result);
-  print('Decrypted: $decrypted');
-}
-*/
