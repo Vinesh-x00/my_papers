@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:my_papers/models/aes_cipher.dart';
@@ -41,7 +39,6 @@ class NoteDatabase extends ChangeNotifier {
   }
 
   void fetchNote({DateTime? fdate, bool? notnotify}) {
-    log("Fetched");
     fdate ??= DateTime.now();
     final (start, end) = getWeekRange(fdate);
     startDate = start;
@@ -62,7 +59,7 @@ class NoteDatabase extends ChangeNotifier {
       existingNote.iv = cipherinfo.iv;
       _noteBox.put(existingNote);
     }
-    fetchNote(fdate: startDate);
+    //fetchNote(fdate: startDate);
 
   }
 
