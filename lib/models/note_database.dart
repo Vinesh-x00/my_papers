@@ -59,7 +59,7 @@ class NoteDatabase extends ChangeNotifier {
       existingNote.iv = cipherinfo.iv;
       _noteBox.put(existingNote);
     }
-    //fetchNote(fdate: startDate);
+    fetchNote(fdate: startDate);
 
   }
 
