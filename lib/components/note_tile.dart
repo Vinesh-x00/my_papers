@@ -8,10 +8,7 @@ class NoteTile extends StatelessWidget {
   final void Function(int) delete;
   final Note note;
 
-  const NoteTile(
-      {super.key,
-      required this.delete,
-      required this.note});
+  const NoteTile({super.key, required this.delete, required this.note});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +18,7 @@ class NoteTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       margin: const EdgeInsets.only(left: 25, right: 25, top: 20),
+
       ///Tile syling
       child: ListTile(
         title: Text(formatDate(date: note.date)),
@@ -32,14 +30,32 @@ class NoteTile extends StatelessWidget {
                 onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            NoteEditor(note: note),
+                        builder: (context) => NoteEditor(note: note),
                       ),
                     ),
                 icon: Icon(Icons.edit)),
+
             /// Button to delete Note
             IconButton(
-                onPressed: () => delete(note.id),
+              /// Confirmation dialogue to delete note
+                onPressed: () => showDialog(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                          content: const Text("Deleting note"),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                delete(note.id);
+                                Navigator.pop(context);
+                              },
+                              child: const Text("Ok"),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text("Cancel"),
+                            ),
+                          ],
+                        )),
                 icon: Icon(Icons.delete))
           ],
         ),
