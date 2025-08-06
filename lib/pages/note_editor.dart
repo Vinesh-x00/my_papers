@@ -59,7 +59,7 @@ class _NoteEditorState extends State<NoteEditor> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 40),
                   child: QuillEditor.basic(controller: _controller),
                 ),
               ),
