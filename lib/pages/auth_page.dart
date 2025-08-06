@@ -19,6 +19,7 @@ class AuthPage extends StatefulWidget {
 class _AuthPageState extends State<AuthPage> {
   final _passwordController = TextEditingController();
   String _msg = '';
+  bool _isObscure = true;
 
   @override
   void dispose() {
@@ -72,10 +73,21 @@ class _AuthPageState extends State<AuthPage> {
             ),
             TextField(
               controller: _passwordController,
-              obscureText: true,
+              obscureText: _isObscure,
               enableSuggestions: false,
               autocorrect: false,
-              decoration: InputDecoration(labelText: 'Enter Password'),
+              decoration: InputDecoration(
+                labelText: 'Enter Password',
+                suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isObscure = !_isObscure;
+                      });
+                    },
+                    icon: _isObscure
+                        ? const Icon(Icons.visibility)
+                        : const Icon(Icons.visibility_off)),
+              ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
