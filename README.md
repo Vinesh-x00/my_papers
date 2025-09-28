@@ -31,3 +31,8 @@
 * Dart/Flutter  
 * Provider : State management  
 * ObjectBox : Embeded database  
+
+## TODO
+
+- [ ] import/export notes into file.
+- [ ] Sync notes with cloud.
